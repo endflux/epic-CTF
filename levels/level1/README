@@ -1,0 +1,4 @@
+Find the password for level2.
+
+To connect to the next level:
+  ssh level2@localhost -p 2220

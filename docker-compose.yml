@@ -1,0 +1,6 @@
+services:
+  ctf-server:
+    build: .
+    ports:
+      - "2220:22"
+    restart: unless-stopped

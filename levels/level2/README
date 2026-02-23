@@ -1,0 +1,4 @@
+Find the password for level3.
+
+To connect to the next level:
+  ssh level3@localhost -p 2220
