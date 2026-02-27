@@ -12,9 +12,10 @@ done
 # Create password store
 mkdir -p /etc/epic_pass
 
-# Generate passwords for each level and store them
+# Write passwords from env vars into the password store
 for i in $(seq 0 $((LEVELS - 1))); do
-    PASSWORD=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | head -c 32)
+    VAR="PASS_LEVEL$i"
+    PASSWORD="${!VAR}"
     echo $PASSWORD > /etc/epic_pass/level$i
     chown level$i:level$i /etc/epic_pass/level$i
     chmod 400 /etc/epic_pass/level$i
