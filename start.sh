@@ -1,12 +1,13 @@
 #!/bin/bash
+LEVELS=4
+
 docker compose up -d --build
 
+IP=$(docker inspect --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' "$(docker compose ps -q)")
+
 echo ""
-echo "=== Container IPs ==="
-docker compose ps -q | while read id; do
-  name=$(docker inspect --format '{{.Name}}' "$id" | sed 's|/||')
-  ip=$(docker inspect --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' "$id")
-  echo "  $name -> $ip"
+echo "=== SSH Commands ==="
+for i in $(seq 0 $((LEVELS - 1))); do
+  echo "  ssh level$i@$IP -p 2220"
 done
-echo "====================="
-echo "SSH: ssh level0@<ip> -p 2220"
+echo "===================="
